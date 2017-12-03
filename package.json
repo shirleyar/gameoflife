@@ -1,0 +1,26 @@
+{
+  "name": "gameoflife",
+  "version": "1.0.0",
+  "description": "Implementation of Conway's Game Of Life in Node.js.",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shirleyar/gameoflife.git"
+  },
+  "author": "Shirley Arusi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shirleyar/gameoflife/issues"
+  },
+  "homepage": "https://github.com/shirleyar/gameoflife#readme",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "mocha": "^4.0.1"
+  }
+}
