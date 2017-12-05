@@ -17,31 +17,31 @@ class GameOfLife {
         for (let row = 0; row < this.rows; row++) {
             for (let col = 0; row < this.cols; col++) {
                 neighborsCount = this.board.countNeighbors(row, col);
-                switch (neighborsCount) {
-                    case 2:
-                        this.board.setCellTheSame(row, col);
-                        break;
-                    case 3:
-                        this.board.setCellAlive(row, col);
-                        break;
-                    default:
-                        this.board.setCellDead(row, col);
-                        break;
-                }
+                this.decideCellNextState(neighborsCount, row, col);
             }
+        }
+    }
+
+    decideCellNextState(neighborsCount, row, col) {
+        switch (neighborsCount) {
+            case 2:
+                this.board.setCellTheSame(row, col);
+                break;
+            case 3:
+                this.board.setCellAlive(row, col);
+                break;
+            default:
+                this.board.setCellDead(row, col);
+                break;
         }
     }
 
     updateGeneration() {
         this.setNextGeneration();
-        for (let row =0; row<this.rows;rows++) {
-            for (let col = 0; col < this.cols; col ++) {
-                this.board.
-            }
+        this.board.updateCells();
         }
-    }
 
-    init () {
+    init (){
         // todo: implement
     }
 

@@ -11,16 +11,19 @@ class Cell {
     }
 
     Die() {
+        // todo: add log-- if nextState was not undefined
         this.nextState = constants.CELL_DEAD;
     }
 
     Live() {
+        // todo: add log-- if nextState was not undefined
         this.nextState = constants.CELL_ALIVE;
     }
 
     StayTheSame(){
+        // todo: add log-- if nextState was not undefined
         if (_.isNil(this.currentState)) {
-            throw new Error(constants.ERROR_MSG_NIL)
+            throw new Error(constants.ERROR_MSG_NIL);
         }
         this.nextState = this.currentState;
     }
@@ -29,12 +32,13 @@ class Cell {
         if (_.isNil(this.currentState)) {
             throw new Error(constants.ERROR_MSG_NIL)
         }
-        return this.currentState;
+        return this.currentState === constants.CELL_ALIVE;
     }
 
     updateCurrentState() {
-        if(!this.nextState) {
-            throw (constants.ERROR_MSG_NEXT_STATE_UNDEFINED);
+        if(_.isNil(this.nextState)) {
+            this.currentState = constants.CELL_DEAD;
+            throw new Error (constants.ERROR_MSG_NEXT_STATE_UNDEFINED);
         }
         this.currentState = this.nextState;
         this.nextState = undefined;

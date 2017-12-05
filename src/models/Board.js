@@ -1,12 +1,14 @@
 'use strict';
 
+const _ = require('lodash');
+
 const Cell = require('./Cell'),
     constants = require('../utils/consts');
 
 class Board {  // multi dimensional array rows x columns
     constructor(rows, cols) {
-        if (!this.isValidScales(rows, cols)) {
-            throw new Error (constants.ERROR_MSG_BOARD_SCALES_INVALID);
+        if (!Board.isValidScales(rows, cols)) {
+            throw new Error(constants.ERROR_MSG_BOARD_SCALES_INVALID);
         }
         this.rows = rows;
         this.cols = cols;
@@ -24,29 +26,42 @@ class Board {  // multi dimensional array rows x columns
         }
     }
 
-    setCellDead(row, col) {
-        this.cells[row][col].Die()
-    }
-
-    setCellAlive(row, col) {
-        this.cells[row][col].Live();
-    }
-
-    setCellTheSame (row, col) {
-        this.cells[row][col].StayTheSame();
+    setCell(row, col, next_state) {
+        if (!this.isValidCellLocation(row, col)) {
+            throw new Error(constants.ERROR_MSG_CELL_OUT_BOUNDARIES);
+        }
+        switch (next_state) {
+            case constants.CELL_ALIVE:
+                this.cells[row][col].Live();
+                break;
+            case constants.CELL_DEAD:
+                this.cells[row][col].Die();
+                break;
+            default:
+                this.cells[row][col].StayTheSame();
+                break;
+        }
     }
 
     countNeighbors(row, col) {
+        if (!this.isValidCellLocation(row, col)) {
+            throw new Error(constants.ERROR_MSG_CELL_OUT_BOUNDARIES);
+        }
         let count = 0;
-        for (let i = row - 1; i <= row + 1; i++) {
-            for (let j = col - 1; j <= col + 1; j + 1) {
-                if (i === row && j === col) {
+        let bottomRow = row - 1 < 0 ? 0 : row -1;
+        let bottomCol = col -1 < 0 ? 0 : col -1;
+        let topRow = row+1 >= this.rows ? this.rows -1 : row +1;
+        let topCol = col + 1 >= this.cols ? this.cols-1 : col + 1;
+
+        for (let i = bottomRow; i <= topRow; i++) {
+            for (let j = bottomCol; j <= topCol; j++) {
+                if (!(i === row && j === col)) {
                     try {
                         count += this.cells[i][j].isAlive() ? 1 : 0;
                     }
                     catch (err) {  // an error was caught, set cell to dead and log error & do not change count
                         // todo: add here log
-                        this.cells[i][j].Die();
+                        this.cells[i][j].Die(); // if cell is not alive nor dead - kill him.
                     }
                 }
             }
@@ -55,9 +70,12 @@ class Board {  // multi dimensional array rows x columns
     }
 
     updateCells() {
-        for (let row = 0)
+        for (let row = 0; row < this.rows; row++) {
+            for (let col = 0; col < this.cols; col++) {
+                this.cells[row][col].updateCurrentState()
+            }
+        }
     }
-
 
     static isValidScales(rows, cols) {
         let result = false;
@@ -65,6 +83,12 @@ class Board {  // multi dimensional array rows x columns
             result = true;
         }
         return result;
+    }
+
+    isValidCellLocation(row, col) {
+        return !(_.isNil(row) || _.isNil(col) ||
+            row < 0 || row >= this.rows ||
+            col >= this.cols || col < 0);
     }
 }
 
