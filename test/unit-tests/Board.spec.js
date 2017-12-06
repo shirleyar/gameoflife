@@ -9,10 +9,10 @@ const Board = require('../../src/models/Board'),
     Cell = require('../../src/models/Cell'),
     constants = require('../utils/consts');
 
-describe('Unit tests for Cell class', function () {
+describe('Unit tests for Board class', function () {
     let board, sandbox;
 
-    beforeEach(function () {
+    before(function () {
         sandbox = sinon.sandbox.create();
     });
 
@@ -218,7 +218,7 @@ describe('Unit tests for Cell class', function () {
         });
 
         it('should throw an error when setting cell[undefined][3]', function () {
-            should(() => board.setCell(undefined, 3)).throw(constants.ERROR_MSG_CELL_OUT_BOUNDARIES);
+            should(() => board.countNeighbors(undefined, 3)).throw(constants.ERROR_MSG_CELL_OUT_BOUNDARIES);
         });
     });
 

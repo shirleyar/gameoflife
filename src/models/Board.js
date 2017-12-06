@@ -8,6 +8,7 @@ const Cell = require('./Cell'),
 class Board {  // multi dimensional array rows x columns
     constructor(rows, cols) {
         if (!Board.isValidScales(rows, cols)) {
+            // todo: add log
             throw new Error(constants.ERROR_MSG_BOARD_SCALES_INVALID);
         }
         this.rows = rows;
