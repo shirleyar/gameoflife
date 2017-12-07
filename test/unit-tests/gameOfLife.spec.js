@@ -244,16 +244,30 @@ describe('Unit tests for GameOfLife class', function () {
         it('should call init and setInterval successfully', ()=>{
             initStub = sandbox.stub(game, 'init');
             setIntervalsStub = sandbox.stub(game,'setIntervals');
-            game.start();
-
+            game.start(livingCells, intervals);
+            initStub.calledWithExactly(livingCells).should.be.true('init should be called with the alive cells locations array and no other arguments');
+            initStub.calledOnce.should.be.true('init should be called only once');
+            setIntervalsStub.calledWithExactly(intervals).should.be.true('setIntervals should be called with the requested interval and no other arguments');
+            setIntervalsStub.calledOnce.should.be.true('setIntervals should be called only once');
         });
 
         it ('should catch any error from init and re-throw it', ()=>{
-
+            initStub = sandbox.stub(game, 'init').throws(new Error('error'));
+            setIntervalsStub = sandbox.stub(game, 'setIntervals');
+            should(()=>game.start(livingCells, intervals)).throw('error');
+            initStub.calledWithExactly(livingCells).should.be.true('init should be called with the alive cells locations array and no other arguments');
+            initStub.calledOnce.should.be.true('init should be called only once');
+            setIntervalsStub.called.should.be.false('setIntervals should not be called');
         });
 
         it ('should catch any error from setIntervals and re-throw it', ()=> {
-
+            initStub = sandbox.stub(game, 'init');
+            setIntervalsStub = sandbox.stub(game, 'setIntervals').throws(new Error('error'));
+            should(()=>game.start(livingCells, intervals)).throw('error');
+            setIntervalsStub.calledWithExactly(intervals).should.be.true('setIntervals should be called with the requested interval and no other arguments');
+            setIntervalsStub.calledOnce.should.be.true('setIntervals should be called only once');
+            initStub.calledWithExactly(livingCells).should.be.true('init should be called with the alive cells locations array and no other arguments');
+            initStub.calledOnce.should.be.true('init should be called only once');
         });
     });
 });

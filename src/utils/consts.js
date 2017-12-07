@@ -16,4 +16,14 @@ module.exports = {
     ERROR_MSG_INVALID_INTERVAL: "Intervals should be between 1 and %s",
     ERROR_MSG_UNINITIALIZED: "Trying to start an uninitialized game",
     ERROR_MSG_INVALID_INPUT_INIT: "Invalid arguments in init function",
+
+    WELCOME_MSG:"Welcome User! This is Conway's Game Of Life. The rules are simple:" +
+    "\nThere is a board. Each place on the board is a cell." +
+    "\nA cell can be either alive or dead, not both (zombie fan?)" +
+    "\nIf the cell has %s living neighbors, it's state will remain." +
+    "\nIf the cell has %s living neighbors, it will come to life." +
+    "\nAny other number of neighbors the cell will die.",
+
+    EVENT_UPDATED_GENERATION: "updated",
+    EVENT_STOPPED: 'stopped',
 };

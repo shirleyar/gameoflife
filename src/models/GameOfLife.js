@@ -6,7 +6,7 @@ const Board = require('./Board'),
     constants = require('../utils/consts');
 
 class GameOfLife {
-    constructor(rows, columns) {
+    constructor(rows, columns, generations, eventEmitter) {
         try {
             this.board = new Board(rows, columns);
         } catch (error) {
@@ -17,6 +17,9 @@ class GameOfLife {
         this.cols = columns;
         this.intervals = undefined;
         this.initialized = false;
+        this.generations = generations;
+        this.currentGeneration = 0;
+        this.eventEmitter = eventEmitter;
     }
 
     setNextGeneration() {
@@ -58,6 +61,12 @@ class GameOfLife {
     updateGeneration() {
         this.setNextGeneration();
         this.board.updateCells();
+        this.currentGeneration++;
+        this.eventEmitter.emit(constants.EVENT_UPDATED_GENERATION);
+        if (this.currentGeneration === this.generations) {
+            this.stop();
+            this.eventEmitter.emit(constants.EVENT_STOPPED);
+        }
     }
 
     init(livingCellsArray) {  //input: array that each item is a location of a cell on the board
@@ -70,7 +79,8 @@ class GameOfLife {
                 throw new Error (constants.ERROR_MSG_CELL_OUT_BOUNDARIES);
             }
             this.board.cells[cell.row][cell.col].currentState = constants.CELL_ALIVE;
-        })
+        });
+        this.initialized=true;
     }
 
     static isValidIntervals(interval) {  // game intervals can be up to a minute, not more
@@ -96,7 +106,7 @@ class GameOfLife {
             throw new Error(constants.ERROR_MSG_UNINITIALIZED);
         }
         if (!this.intervals) {
-            this.intervals = setInterval(this.updateGeneration, intervalsMs * 1000);
+            this.intervals = setInterval(this.updateGeneration.bind(this), intervalsMs * 1000);
             // todo: add log
         } else {
             // todo: add log
@@ -107,6 +117,14 @@ class GameOfLife {
         clearInterval(this.intervals);
         this.intervals = undefined;
         //todo: add log
+    }
+
+    get Board() {
+        return this.board;
+    }
+
+    get Generation() {
+        return this.currentGeneration;
     }
 
 }

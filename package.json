@@ -6,6 +6,9 @@
   "directories": {
     "test": "test"
   },
+  "bin": {
+    "gameoflife": "./src/index.js"
+  },
   "scripts": {
     "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha  ./test/unit-tests/ -- --recursive --reporter mochawesome"
   },
@@ -21,10 +24,13 @@
   "homepage": "https://github.com/shirleyar/gameoflife#readme",
   "dependencies": {
     "blessed": "^0.1.81",
+    "cli-clear": "^1.0.4",
     "figlet": "^1.2.0",
     "inquirer": "^4.0.1",
     "istanbul": "^0.4.5",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "table": "^4.0.2",
+    "word-table": "^1.0.3"
   },
   "devDependencies": {
     "mocha": "^4.0.1",

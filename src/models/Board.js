@@ -44,6 +44,10 @@ class Board {  // multi dimensional array rows x columns
         }
     }
 
+    isCellAlive (row, col) {
+        return this.cells[row][col].isAlive();
+    }
+
     countNeighbors(row, col) {
         if (!this.isValidCellLocation(row, col)) {
             throw new Error(constants.ERROR_MSG_CELL_OUT_BOUNDARIES);
