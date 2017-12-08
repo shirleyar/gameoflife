@@ -27,7 +27,7 @@ class ControllerCliGameOfLife {
                 let game = predefinedGames.getGameByName(name);
                 this.rows = game.rows;
                 this.cols = game.cols;
-                this.game = new GameOfLife(game.rows, game.cols, game.generations, eventEmitter);
+                this.game = new GameOfLife(game.rows, game.cols, game.generations, eventEmitter, game.intervals);
                 this.game.init(game.livingCells);
                 this.board = new BoardUI(this.convertGameBoardToUiData());
                 this.board.printBoard();

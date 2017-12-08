@@ -44,8 +44,17 @@ class Board {  // multi dimensional array rows x columns
         }
     }
 
-    isCellAlive (row, col) {
-        return this.cells[row][col].isAlive();
+    isCellAlive(row, col) {
+        if (!this.isValidCellLocation(row,col)) {
+            //todo: add log
+            throw new Error (constants.ERROR_MSG_CELL_OUT_BOUNDARIES);
+        }
+        try {
+            return this.cells[row][col].isAlive();
+        } catch (error) {
+        // todo: add log
+            throw (error)
+        }
     }
 
     countNeighbors(row, col) {
@@ -53,10 +62,10 @@ class Board {  // multi dimensional array rows x columns
             throw new Error(constants.ERROR_MSG_CELL_OUT_BOUNDARIES);
         }
         let count = 0;
-        let bottomRow = row - 1 < 0 ? 0 : row -1;
-        let bottomCol = col -1 < 0 ? 0 : col -1;
-        let topRow = row+1 >= this.rows ? this.rows -1 : row +1;
-        let topCol = col + 1 >= this.cols ? this.cols-1 : col + 1;
+        let bottomRow = row - 1 < 0 ? 0 : row - 1;
+        let bottomCol = col - 1 < 0 ? 0 : col - 1;
+        let topRow = row + 1 >= this.rows ? this.rows - 1 : row + 1;
+        let topCol = col + 1 >= this.cols ? this.cols - 1 : col + 1;
 
         for (let i = bottomRow; i <= topRow; i++) {
             for (let j = bottomCol; j <= topCol; j++) {

@@ -6,17 +6,26 @@ const Board = require('./Board'),
     constants = require('../utils/consts');
 
 class GameOfLife {
-    constructor(rows, columns, generations, eventEmitter) {
+    constructor(rows, columns, generations, eventEmitter, intervals) {
+        if (!GameOfLife.isValidGenerations(generations)) {
+            throw new Error(constants.ERROR_MSG_INVALID_GENERATIONS);
+        }
+        if (!GameOfLife.isValidIntervals(intervals)) {
+            throw new Error(constants.ERROR_MSG_INVALID_INTERVAL);
+        }
+        if (!eventEmitter) {
+            throw new Error(constants.ERROR_MSG_INVALID_EVENT_EMITTER);
+        }
         try {
             this.board = new Board(rows, columns);
         } catch (error) {
             // todo: add log
             throw error;
         }
+
         this.rows = rows;
         this.cols = columns;
-        this.intervals = undefined;
-        this.initialized = false;
+        this.intervals = intervals;
         this.generations = generations;
         this.currentGeneration = 0;
         this.eventEmitter = eventEmitter;
@@ -87,29 +96,13 @@ class GameOfLife {
         return interval > 0 && interval <= constants.MAX_INTERVALS;
     }
 
-    start(livingCellsArray, intervalsMs) {
+    start(livingCellsArray) {
         try {
             this.init(livingCellsArray);
-            this.setIntervals(intervalsMs);
+            this.intervals = setInterval(this.updateGeneration.bind(this), this.intervals * 1000);
         } catch (error) {
             //todo: add logs
             throw error;
-        }
-    }
-
-    setIntervals(intervalsMs) {
-        // input: intervals in milliseconds
-        if (!GameOfLife.isValidIntervals(intervalsMs)) {
-            throw new Error(util.format(constants.ERROR_MSG_INVALID_INTERVAL, constants.MAX_INTERVALS));
-        }
-        if (!this.initialized) {
-            throw new Error(constants.ERROR_MSG_UNINITIALIZED);
-        }
-        if (!this.intervals) {
-            this.intervals = setInterval(this.updateGeneration.bind(this), intervalsMs * 1000);
-            // todo: add log
-        } else {
-            // todo: add log
         }
     }
 
@@ -127,6 +120,9 @@ class GameOfLife {
         return this.currentGeneration;
     }
 
+    static isValidGenerations(generations) {
+        return generations >= 0;
+    }
 }
 
 module.exports = GameOfLife;

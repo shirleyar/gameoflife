@@ -3,11 +3,11 @@
 const inquirer = require('inquirer'),
     figlet = require('figlet');
 
-const constantsUI = require('./consts');
+const constants = require('../../utils/consts');
 
 class UserInteractionUi {
     static welcomeUser(msg) {
-        console.log(figlet.textSync(constantsUI.GAME_NAME, {horizontalLayout: 'full'}));
+        console.log(figlet.textSync(constants.GAME_NAME, {horizontalLayout: 'full'}));
         console.log(msg);
     }
 

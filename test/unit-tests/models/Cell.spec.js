@@ -2,8 +2,8 @@
 
 const should = require('should');
 
-const Cell = require('../../src/models/Cell'),
-    constants = require('../utils/consts');
+const Cell = require('../../../src/models/Cell'),
+    constants = require('../../utils/consts');
 
 describe('Unit tests for Cell class', function () {
     let cell = new Cell();
