@@ -2,6 +2,7 @@
 
 const {table, getBorderCharacters} = require('table'),
     clear = require('cli-clear'),
+    format = require('util').format,
     constants = require('./consts'),
     logger = require('../../utils/logger');
 
