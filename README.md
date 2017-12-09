@@ -19,3 +19,9 @@ If the cell has 2 living neighbors, it's state will remain.
  2. run  $npm install
  3. run $gameoflife
  4. Have fun!
+ 
+ ## Un-installation
+  1. In command Line, navigate to the project's directory.
+  2. run  $npm uninstall
+ 
+ PS. it is recommended to open the terminal in a full screen mode. 
