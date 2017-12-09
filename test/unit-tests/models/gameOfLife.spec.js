@@ -27,8 +27,6 @@ describe('Unit tests for GameOfLife class', () => {
     });
 
     describe('for constructor function', () => {
-        // todo: add logs tests
-
         let isValidGenerationsSpy, isValidIntervalsSpy;
 
         beforeEach(() => {

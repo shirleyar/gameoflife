@@ -19,7 +19,6 @@ class BoardUiCli {
     constructor(data) {
         logger.debug(format("BoardUiCli ctor. input-> data: %s", data));
         this.UpdateBoard(data)
-//todo: add log
     }
 
     UpdateBoard(data) {

@@ -23,7 +23,6 @@ describe('Unit tests for Cell class', ()=> {
     });
 
     describe('for isAlive function', ()=> {
-        //todo: add tests and assertions that logs were printed
         it('should return true when the cell is alive', ()=> {
             cell.currentState = constants.CELL_ALIVE;
             cell.nextState = undefined;
@@ -48,7 +47,6 @@ describe('Unit tests for Cell class', ()=> {
     });
 
     describe('for Die function', ()=> {
-        //todo: add tests and assertions that logs were printed
         it("should change cell's nextState to dead when currentState is alive", ()=> {
             cell.currentState = constants.CELL_ALIVE;
             cell.nextState = undefined;
@@ -75,7 +73,6 @@ describe('Unit tests for Cell class', ()=> {
     });
 
     describe('for Live function', ()=> {
-        //todo: add tests and assertions that logs were printed
         it("should change cell's nextState to alive when currentState is dead", ()=> {
             cell.currentState = constants.CELL_ALIVE;
             cell.nextState = undefined;
@@ -102,7 +99,6 @@ describe('Unit tests for Cell class', ()=> {
     });
 
     describe('for StayTheSame function', ()=> {
-        //todo: add tests and assertions that logs were printed
         it("should change cell's nextState to alive when currentState alive", ()=> {
             cell.currentState = constants.CELL_ALIVE;
             cell.nextState = undefined;
@@ -128,7 +124,6 @@ describe('Unit tests for Cell class', ()=> {
         });
 
         describe('for updateCurrentState function', ()=> {
-            //todo: add tests and assertions that logs were printed
             it("should change cell's currentState to alive when nextState is alive and set nextState to be undefined", ()=> {
                 cell.nextState = constants.CELL_ALIVE;
                 cell.currentState = undefined;
