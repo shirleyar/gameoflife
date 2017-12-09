@@ -8,7 +8,7 @@ UI: CLI
 
 ## Rules
 The rules are simple:    
-     There is a board. Each place on the board is a cell.    
+There is a board. Each place on the board is a cell.   
 A cell can be either alive or dead, not both (zombie fan?)    
 If the cell has 2 living neighbors, it's state will remain.    
  If the cell has 3 living neighbors, it will come to life.    
@@ -23,5 +23,10 @@ If the cell has 2 living neighbors, it's state will remain.
  ## Un-installation
   1. In command Line, navigate to the project's directory.
   2. run  $npm uninstall
+ 
+ ### TODOs:
+ 1. Controller unit tests.
+ 2. CLI interactions unit tests.
+ 3. System tests 
  
  PS. it is recommended to open the terminal in a full screen mode. 
