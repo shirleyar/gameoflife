@@ -3,6 +3,8 @@
 const bunyan = require('bunyan'),
 constants = require('./consts');
 
+
+
 const logger = bunyan.createLogger(
     {
         name: constants.GAME_NAME,
@@ -10,7 +12,7 @@ const logger = bunyan.createLogger(
         level: constants.LOG_LEVEL,
         streams: [
             {
-                level: constants.LOG_LEVEL,
+                level: constants.LOG_LEVEL || 'error',
                 stream: process.stdout
             },
             {

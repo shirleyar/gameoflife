@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const CLIcontroller = require('./controllers/cli-controller');
+const CLIcontroller = require('./controllers/controller');
 
 let controller = new CLIcontroller();
 

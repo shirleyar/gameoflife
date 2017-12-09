@@ -5,26 +5,26 @@ const should = require('should');
 const Cell = require('../../../src/models/Cell'),
     constants = require('../../utils/consts');
 
-describe('Unit tests for Cell class', function () {
+describe('Unit tests for Cell class', ()=> {
     let cell = new Cell();
-    describe('for constructor function', function () {
-        it('should return an typeof "Cell"', function () {
+    describe('for constructor function', ()=> {
+        it('should return an typeof "Cell"', ()=> {
             should(cell instanceof Cell).equal(true, "cell should be an instance of Cell, but returned false");
         });
-        it("should set cell's currentState to be dead and nextState to be undefined", function () {
+        it("should set cell's currentState to be dead and nextState to be undefined", ()=> {
             cell.currentState.should.equal(constants.CELL_DEAD);
             should(cell.nextState).equal(undefined);
         });
 
-        it('should have only currentState and nextState properties', function () {
+        it('should have only currentState and nextState properties', ()=> {
             let keys = ['currentState', 'nextState'];
             Object.keys(cell).should.deepEqual(keys);
         })
     });
 
-    describe('for isAlive function', function () {
+    describe('for isAlive function', ()=> {
         //todo: add tests and assertions that logs were printed
-        it('should return true when the cell is alive', function () {
+        it('should return true when the cell is alive', ()=> {
             cell.currentState = constants.CELL_ALIVE;
             cell.nextState = undefined;
             cell.isAlive().should.equal(true, "isAlive did not return true");
@@ -32,14 +32,14 @@ describe('Unit tests for Cell class', function () {
             should(cell.nextState).equal(undefined, "isAlive does not suppose to change nextState");
         });
 
-        it('should return false when the cell is alive', function () {
+        it('should return false when the cell is alive', ()=> {
             cell.currentState = constants.CELL_DEAD;
             cell.isAlive().should.equal(false, "isAlive did not return false");
             cell.currentState.should.equal(constants.CELL_DEAD, "isAlive does suppose to change currentState");
             should(cell.nextState).equal(undefined, "isAlive does not suppose to change nextState");
         });
 
-        it('should throw an error when the cell is null or undefined', function () {
+        it('should throw an error when the cell is null or undefined', ()=> {
             cell.currentState = null;
             should(() => cell.isAlive()).throw(constants.ERROR_MSG_NIL);
             should(cell.currentState).equal(null, "isAlive does suppose to change currentState");
@@ -47,9 +47,9 @@ describe('Unit tests for Cell class', function () {
         })
     });
 
-    describe('for Die function', function () {
+    describe('for Die function', ()=> {
         //todo: add tests and assertions that logs were printed
-        it("should change cell's nextState to dead when currentState is alive", function () {
+        it("should change cell's nextState to dead when currentState is alive", ()=> {
             cell.currentState = constants.CELL_ALIVE;
             cell.nextState = undefined;
             cell.Die();
@@ -57,7 +57,7 @@ describe('Unit tests for Cell class', function () {
             cell.isAlive().should.equal(true, "Die does not suppose to change current state");
         });
 
-        it("cell's nextState should set dead when currentState is dead", function () {
+        it("cell's nextState should set dead when currentState is dead", ()=> {
             cell.currentState=constants.CELL_DEAD;
             cell.nextState = undefined;
             cell.Die();
@@ -65,7 +65,7 @@ describe('Unit tests for Cell class', function () {
             cell.isAlive().should.equal(false, "Die does not suppose to change current state");
         });
 
-        it("should change cell's nextState to dead when currentState is null\\undefined", function () {
+        it("should change cell's nextState to dead when currentState is null\\undefined", ()=> {
             cell.currentState = undefined;
             cell.nextState = undefined;
             cell.Die();
@@ -74,9 +74,9 @@ describe('Unit tests for Cell class', function () {
         });
     });
 
-    describe('for Live function', function () {
+    describe('for Live function', ()=> {
         //todo: add tests and assertions that logs were printed
-        it("should change cell's nextState to alive when currentState is dead", function () {
+        it("should change cell's nextState to alive when currentState is dead", ()=> {
             cell.currentState = constants.CELL_ALIVE;
             cell.nextState = undefined;
             cell.Live();
@@ -84,7 +84,7 @@ describe('Unit tests for Cell class', function () {
             cell.isAlive().should.equal(true, "Live does not suppose to change current state");
         });
 
-        it("cell's nextState should set alive when currentState is alive", function () {
+        it("cell's nextState should set alive when currentState is alive", ()=> {
             cell.currentState = constants.CELL_ALIVE;
             cell.nextState = undefined;
             cell.Live();
@@ -92,7 +92,7 @@ describe('Unit tests for Cell class', function () {
             cell.isAlive().should.equal(true, "Live does not suppose to change current state");
         });
 
-        it("should change cell's nextState to alive when currentState is null\\undefined", function () {
+        it("should change cell's nextState to alive when currentState is null\\undefined", ()=> {
             cell.currentState = undefined;
             cell.nextState = undefined;
             cell.Live();
@@ -101,9 +101,9 @@ describe('Unit tests for Cell class', function () {
         });
     });
 
-    describe('for StayTheSame function', function () {
+    describe('for StayTheSame function', ()=> {
         //todo: add tests and assertions that logs were printed
-        it("should change cell's nextState to alive when currentState alive", function () {
+        it("should change cell's nextState to alive when currentState alive", ()=> {
             cell.currentState = constants.CELL_ALIVE;
             cell.nextState = undefined;
             cell.StayTheSame();
@@ -111,7 +111,7 @@ describe('Unit tests for Cell class', function () {
             cell.currentState.should.equal(constants.CELL_ALIVE, "StayTheSame does not suppose to change current state");
         });
 
-        it("cell's nextState should set dead when currentState is dead", function () {
+        it("cell's nextState should set dead when currentState is dead", ()=> {
             cell.currentState = constants.CELL_DEAD;
             cell.nextState = undefined;
             cell.StayTheSame();
@@ -119,7 +119,7 @@ describe('Unit tests for Cell class', function () {
             cell.currentState.should.equal(constants.CELL_DEAD, "StayTheSame does not suppose to change current state");
         });
 
-        it('should throw an error when the cell is null or undefined', function () {
+        it('should throw an error when the cell is null or undefined', ()=> {
             cell.currentState = null;
             cell.nextState = undefined;
             should(() => cell.StayTheSame()).throw(constants.ERROR_MSG_NIL);
@@ -127,9 +127,9 @@ describe('Unit tests for Cell class', function () {
             should(cell.nextState).equal(undefined, "StayTheSame does not suppose to change nextState");
         });
 
-        describe('for updateCurrentState function', function () {
+        describe('for updateCurrentState function', ()=> {
             //todo: add tests and assertions that logs were printed
-            it("should change cell's currentState to alive when nextState is alive and set nextState to be undefined", function () {
+            it("should change cell's currentState to alive when nextState is alive and set nextState to be undefined", ()=> {
                 cell.nextState = constants.CELL_ALIVE;
                 cell.currentState = undefined;
                 cell.updateCurrentState();
@@ -137,7 +137,7 @@ describe('Unit tests for Cell class', function () {
                 should(cell.nextState).equal(undefined, "updateCurrentState is suppose to change next state to undefined");
             });
 
-            it("should change cell's currentState to dead when nextState is dead and set nextState to be undefined", function () {
+            it("should change cell's currentState to dead when nextState is dead and set nextState to be undefined", ()=> {
                 cell.nextState = constants.CELL_DEAD;
                 cell.currentState = undefined;
                 cell.updateCurrentState();
@@ -145,7 +145,7 @@ describe('Unit tests for Cell class', function () {
                 should(cell.nextState).equal(undefined, "updateCurrentState is suppose to change next state to undefined");
             });
 
-            it('should throw an error when the cell is null or undefined', function () {
+            it('should throw an error when the cell is null or undefined', ()=> {
                 cell.currentState = undefined;
                 cell.nextState = null;
                 should(() => cell.updateCurrentState()).throw(constants.ERROR_MSG_NEXT_STATE_UNDEFINED);

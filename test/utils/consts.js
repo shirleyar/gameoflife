@@ -18,6 +18,15 @@ module.exports = {
     ERROR_MSG_INVALID_INPUT_INIT: "Invalid arguments in init function",
     ERROR_MSG_INVALID_GENERATIONS: "Invalid generations. Should be an int larger or equal to 0",
     ERROR_MSG_INVALID_EVENT_EMITTER: "Invalid eventEmitter",
+
     EVENT_UPDATED_GENERATION: "updated",
     EVENT_STOPPED: 'stopped',
+
+    WELCOME_MSG:"Welcome User! This is Conway's Game Of Life. The rules are simple:" +
+    "\nThere is a board. Each place on the board is a cell." +
+    "\nA cell can be either alive or dead, not both (zombie fan?)" +
+    "\nIf the cell has %s living neighbors, it's state will remain." +
+    "\nIf the cell has %s living neighbors, it will come to life." +
+    "\nAny other number of neighbors the cell will die.",
+
 };

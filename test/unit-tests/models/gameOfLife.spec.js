@@ -194,7 +194,7 @@ describe('Unit tests for GameOfLife class', () => {
                 next: undefined,
                 neighbors: constants.NEXT_THE_SAME
             },
-        ].forEach(function (testCase) {
+        ].forEach((testCase) => {
             it(util.format('should set cell to be %s for %s neighbors', testCase.next, testCase.neighbors), () => {
                 setCellStub = sandbox.stub(game.board, 'setCell');
                 game.decideCellNextState(testCase.neighbors, testCase.row, testCase.col);

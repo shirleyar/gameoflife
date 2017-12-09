@@ -29,8 +29,9 @@ module.exports = {
     EVENT_UPDATED_GENERATION: "updated",
     EVENT_STOPPED: 'stopped',
 
-    LOG_LEVEL: process.env || 'error',
+    LOG_LEVEL: process.env.LOG_LEVEL || 'info',
 
     GAME_NAME: "Conway's Game Of Life",
 
+    ERROR_CODE: 1,
 };
